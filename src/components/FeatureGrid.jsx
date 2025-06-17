@@ -1,48 +1,23 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { getWhatsNew } from '../services/api'
+import { formatCurrency } from '../services/utils'
 
 const FeatureGrid = () => {
-  const items = [
-    {
-      image: 'https://picsum.photos/200/200?random=1',
-      title: '2,340',
-      description: 'Monthly signups',
-    },
-    {
-      image: 'https://picsum.photos/200/200?random=8',
-      title: '$34,000',
-      description: 'This month',
-    },
-    {
-      image: 'https://picsum.photos/200/200?random=2',
-      title: '87%',
-      description: 'Returning users',
-    },
-    {
-      image: 'https://picsum.photos/200/200?random=3',
-      title: '146',
-      description: 'New orders',
-    },
-    {
-      image: 'https://picsum.photos/200/200?random=4',
-      title: '22%',
-      description: 'Bounce Rate',
-    },
-    {
-      image: 'https://picsum.photos/200/200?random=5',
-      title: '73',
-      description: 'Open tickets',
-    },
-    {
-      image: 'https://picsum.photos/200/200?random=6',
-      title: '99.98%',
-      description: 'Uptime',
-    },
-    {
-      image: 'https://picsum.photos/200/200?random=7',
-      title: '12',
-      description: 'Deploys this week',
-    },
-  ];
+  const [items, setItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+  
+    useEffect(() => {
+      const fetchItems = async () => {
+        try {
+          const response = await getWhatsNew();
+          setItems(response);
+        } catch (error) {
+          console.error('Erro ao buscar imagens:', error.message);
+        }
+      };
+      fetchItems();
+  }, []);
 
   return (
     <section className="px-4 py-10 sm:px-6 lg:px-8">
@@ -52,18 +27,20 @@ const FeatureGrid = () => {
         </span>
         <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-6">
           {items.map((item, index) => (
-            <div
-              key={index}
-              className="bg-white shadow-md rounded-2xl p-5 hover:shadow-lg transition duration-300 border flex flex-col items-center text-center"
+            <Link
+              key={item._id}
+              to={`/item/${item._id}`}
+              className="bg-white shadow-md rounded-2xl p-5 hover:shadow-lg transition duration-300 border flex flex-col items-center text-center hover:scale-105"
             >
               <img
-                src={item.image}
-                alt={item.description}
-                className="w-30 h-30 mb-4 object-contain"
+                src={item.midia.url1}
+                alt={item.titulo}
+                className="w-[250px] h-[270px] object-cover mb-4"
               />
-              <h3 className="text-xl font-semibold text-gray-800">{item.title}</h3>
-              <p className="mt-1 text-sm text-gray-500">{item.description}</p>
-            </div>
+              <h3 className="text-xl font-semibold text-gray-800">{item.titulo}</h3>
+              <p className="mt-1 text-sm text-gray-500">{item.pedra}</p>
+              <p className="mt-1 text-sm font-semibold text-gray-500">{formatCurrency(item.preco)}</p>
+            </Link>
           ))}
         </div>
       </div>

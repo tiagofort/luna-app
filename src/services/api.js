@@ -30,3 +30,26 @@ export const getMainCarosel = async () => {
 
   return response.json();
 }
+
+export const getWhatsNew = async () => {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/item/buscarNovidades`); 
+  
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || 'Fetch failed');
+  }
+
+  const data = await response.json();
+  return data.slice(0, 8);
+}
+
+export const getItemById = async (id) => {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/item/buscarId/${id}`);
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || 'Fetch failed');
+  }
+
+  return response.json();
+}
