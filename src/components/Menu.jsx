@@ -27,7 +27,7 @@ export default function Header() {
                 <User className="w-6 h-6 text-mainColor" />
                 <div className="relative">
                   <ShoppingCart className="w-6 h-6 text-mainColor" />
-                  <span className="absolute -top-2 -right-2 text-xs bg-yellow-400 text-white rounded-full px-1">12</span>
+                  <span className="absolute -top-2 -right-2 text-xs bg-yellow-400 text-black rounded-full px-1">12</span>
                 </div>
 
                 <div className="md:hidden">

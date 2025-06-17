@@ -1,26 +1,31 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+import { getMainCarosel } from '../services/api';
 
-const images = [
-'https://picsum.photos/250/370?random=1',
-'https://picsum.photos/250/370?random=2',
-'https://picsum.photos/250/370?random=3',
-'https://picsum.photos/250/370?random=4',
-'https://picsum.photos/250/370?random=5',
-'https://picsum.photos/250/370?random=6',
-'https://picsum.photos/250/370?random=7',
-'https://picsum.photos/250/370?random=8',
-'https://picsum.photos/250/370?random=9',
-];
 
 const MainCarosel = () => {
   const handleItemClick = (index) => {
     console.log(`Item ${index + 1} clicado`);
   };
 
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await getMainCarosel();
+        setImages(response);
+      } catch (error) {
+        console.error('Erro ao buscar imagens:', error.message);
+      }
+    };
+    fetchImages();
+  }, []);
+
   return (
     <div className="relative w-full overflow-hidden group">
         <div className="flex w-max animate-scroll-left group-hover:[animation-play-state:paused]">
-            {[...images, ...images].map((src, index) => (
+            {[...images, ...images].map((img, index) => (
                 <div
                     key={index}
                     className="flex-shrink-0 px-[0.75vw]
@@ -35,9 +40,9 @@ const MainCarosel = () => {
                                     md:w-[15vw] md:h-[calc(15vw*1.48)]
                                     lg:w-[10vw] lg:h-[calc(10vw*1.48)]
                                     xl:w-[7vw] xl:h-[calc(7vw*1.48)]"
-                        onClick={() => handleItemClick(index % images.length)}
+                        onClick={() => handleItemClick(img._id)}
                     >
-                        <img src={src} alt={`Item ${index}`} className="w-full h-full object-cover rounded-md shadow-md" />
+                        <img src={img.url} alt={`Item ${img._id}`} className="w-full h-full object-cover rounded-md shadow-md" />
                     </div>
                 </div>
             ))}
