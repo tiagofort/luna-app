@@ -1,51 +1,93 @@
-import { Disclosure } from '@headlessui/react'
-import { Menu, X, ShoppingCart, User } from 'lucide-react'
-import { Link } from 'react-router-dom'
-import logo from '../assets/luna-logo.png'
+import { Disclosure } from '@headlessui/react';
+import { useState } from "react";
+import { Menu, X, ShoppingCart, UserX, UserCheck } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import logo from '../assets/luna-logo.png';
+import CartDrawer from "../components/CartDrawer";
+import LoginModal from './LoginModal';
+import { useCart } from "../context/CartContext";
 
 export default function Header() {
+  const [cartOpen, setCartOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { cart } = useCart();
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  // Simulação de login — substitua por sua lógica real
+  const isLoggedIn = false; // ou useAuth().isLoggedIn se tiver contexto
+
   return (
-    <Disclosure as="nav" className="bg-white shadow-md">
-      {({ open }) => (
-        <>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between h-24 items-center">
-
-              <div className="flex-shrink-0">
-                <Link to="/">
-                  <img className="w-28 sm:w-32 md:w-40 object-contain" src={logo} alt="Logo" />
-                </Link>
-              </div>
-
-              <div className="hidden md:flex space-x-6 items-center">
-                <Link to="/" className="text-mainColor font-semibold hover:text-black">Home</Link>
-                <Link to="/accessories" className="text-mainColor font-semibold hover:text-black">Accessories</Link>
-                <Link to="/about" className="text-mainColor font-semibold hover:text-black">About Us</Link>
-              </div>
-
-              <div className="flex items-center space-x-4">
-                <User className="w-6 h-6 text-mainColor" />
-                <div className="relative">
-                  <ShoppingCart className="w-6 h-6 text-mainColor" />
-                  <span className="absolute -top-2 -right-2 text-xs bg-yellow-400 text-black rounded-full px-1">12</span>
+    <>
+      <Disclosure as="nav" className="bg-white shadow-md">
+        {({ open }) => (
+          <>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex justify-between h-24 items-center">
+                <div className="flex-shrink-0">
+                  <Link to="/">
+                    <img
+                      className="w-28 sm:w-32 md:w-40 object-contain"
+                      src={logo}
+                      alt="Logo"
+                    />
+                  </Link>
                 </div>
 
-                <div className="md:hidden">
-                  <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-mainColor hover:text-black focus:outline-none">
-                    {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                  </Disclosure.Button>
+                <div className="hidden md:flex space-x-6 items-center">
+                  <Link to="/" className="text-mainColor font-semibold hover:text-black">Home</Link>
+                  <Link to="/accessories" className="text-mainColor font-semibold hover:text-black">Accessories</Link>
+                  <Link to="/about" className="text-mainColor font-semibold hover:text-black">About Us</Link>
+                </div>
+
+                <div className="flex items-center space-x-4">
+                  {/* Botão de Usuário com modal */}
+                  <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="relative mr-8"
+                  >
+                    {isLoggedIn ? (
+                      <UserCheck className="w-6 h-6 text-green-500" />
+                    ) : (
+                      <UserX className="w-6 h-6 text-red-500" />
+                    )}
+                  </button>
+
+                  {/* Botão do carrinho */}
+                  <button onClick={() => setCartOpen(true)} className="relative">
+                    <ShoppingCart className="w-6 h-6 text-mainColor" />
+                    {totalItems > 0 && (
+                      <span className="absolute -top-2 -right-2 text-xs bg-yellow-400 text-black rounded-full px-1">
+                        {totalItems}
+                      </span>
+                    )}
+                  </button>
+
+                  {/* Menu mobile */}
+                  <div className="md:hidden">
+                    <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-mainColor hover:text-black focus:outline-none">
+                      {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                    </Disclosure.Button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <Disclosure.Panel className="md:hidden px-4 pt-2 pb-3 space-y-1 bg-white">
-            <Link to="/" className="block text-mainColor font-semibold hover:text-black">Home</Link>
-            <Link to="/accessories" className="block text-mainColor font-semibold hover:text-black">Accessories</Link>
-            <Link to="/about" className="block text-mainColor font-semibold hover:text-black">About Us</Link>
-          </Disclosure.Panel>
-        </>
-      )}
-    </Disclosure>
+            {/* Menu mobile aberto */}
+            <Disclosure.Panel className="md:hidden px-4 pt-2 pb-3 space-y-1 bg-white">
+              <Link to="/" className="block text-mainColor font-semibold hover:text-black">Home</Link>
+              <Link to="/accessories" className="block text-mainColor font-semibold hover:text-black">Accessories</Link>
+              <Link to="/about" className="block text-mainColor font-semibold hover:text-black">About Us</Link>
+            </Disclosure.Panel>
+          </>
+        )}
+      </Disclosure>
+
+      {/* Drawer do carrinho */}
+      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
+
+      {/* Modal de login */}
+      <LoginModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
+    </>
   );
 }
