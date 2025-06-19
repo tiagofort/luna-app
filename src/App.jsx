@@ -8,6 +8,7 @@ import NotFound from '../src/pages/NotFound';
 import ItemDetails from './pages/ItemDetails';
 import Loader from './components/Loader';
 import Cart from '../src/pages/Cart';
+import RegisterUser from './pages/RegisterUser';
 
 export default function App() {
   const location = useLocation();
@@ -18,7 +19,7 @@ export default function App() {
 
     const timeout = setTimeout(() => {
       setLoading(false);
-    }, 1000); // tempo do loader (ajustável)
+    }, 1000);
 
     return () => clearTimeout(timeout);
   }, [location.pathname]);
@@ -31,6 +32,7 @@ export default function App() {
         <Route path="about" element={<About />} />
         <Route path="accessories" element={<Accessories />} />
         <Route path="cart" element={<Cart />} />
+        <Route path="registeruser" element={<RegisterUser />} />
         <Route path="/item/:id" element={<ItemDetails />} />
         <Route path="*" element={<NotFound />} />
       </Route>

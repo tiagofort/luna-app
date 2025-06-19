@@ -1,36 +1,55 @@
 import React, { useState } from "react";
+import { executeLogin } from '../services/api';
+import { useAuthContext } from '../context/AuthContext';
+import { useNavigate  } from 'react-router-dom';
+import { X } from 'lucide-react';
 
 const LoginModal = ({ open, onClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { loginUser } = useAuthContext();
+  const navigate = useNavigate();
 
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center">
-      <div className="bg-white rounded-lg p-6 w-full max-w-sm shadow-lg relative">
+    <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center px-4">
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 relative border border-gray-200">
+        {/* Botão fechar */}
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 text-gray-500 hover:text-black"
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition"
         >
-          ✕
+          <X className="w-5 h-5" />
         </button>
 
-        <h2 className="text-xl font-semibold mb-4">Login</h2>
+        {/* Título */}
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+          👋 Welcome Back
+          <p className="text-sm text-gray-500 mt-1">Do Your Login to continue</p>
+        </h2>
 
+        {/* Formulário */}
         <form
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
-            // lógica de login ou criação
-            alert("Login ou criação de conta aqui.");
+            try {
+              const userData = await executeLogin(email, password);
+              loginUser(userData);
+              setEmail('');
+              setPassword('');
+              onClose();
+            } catch (err) {
+              console.log(err.message);
+            }
           }}
-          className="space-y-4"
+          className="space-y-5"
         >
           <div>
-            <label className="block text-sm font-medium mb-1">Email</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
             <input
               type="email"
-              className="w-full border rounded px-3 py-2 outline-none focus:ring-2 focus:ring-mainColor"
+              className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-mainColor focus:border-mainColor transition"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -38,31 +57,33 @@ const LoginModal = ({ open, onClose }) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">Senha</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
             <input
               type="password"
-              className="w-full border rounded px-3 py-2 outline-none focus:ring-2 focus:ring-mainColor"
+              className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-mainColor focus:border-mainColor transition"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex gap-2 pt-2">
             <button
               type="submit"
-              className="flex-1 bg-mainColor text-white py-2 rounded hover:bg-opacity-90"
+              className="flex-1 bg-mainColor text-white font-medium py-2 rounded-md hover:bg-opacity-90 transition"
             >
-              Login
+              Connect
             </button>
-
-            <button
-              type="button"
-              onClick={() => alert("Criar conta lógica aqui")}
-              className="flex-1 border border-mainColor text-mainColor py-2 rounded hover:bg-mainColor/10"
-            >
-              Criar Conta
-            </button>
+              <button
+                type="button"
+                className="flex-1 border border-mainColor text-mainColor font-medium py-2 rounded-md hover:bg-mainColor/10 transition"
+                onClick={() => {
+                  onClose();       
+                  navigate("/registeruser"); 
+                }}
+              >
+                Create Account
+              </button>
           </div>
         </form>
       </div>

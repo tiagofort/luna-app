@@ -6,16 +6,19 @@ import logo from '../assets/luna-logo.png';
 import CartDrawer from "../components/CartDrawer";
 import LoginModal from './LoginModal';
 import { useCart } from "../context/CartContext";
+import { useAuthContext } from "../context/AuthContext";
 
 export default function Header() {
   const [cartOpen, setCartOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { user } = useAuthContext();
+  const { logoutUser } = useAuthContext();
+  const isLoggedIn = !!user;
 
   const { cart } = useCart();
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-  // Simulação de login — substitua por sua lógica real
-  const isLoggedIn = false; // ou useAuth().isLoggedIn se tiver contexto
+ 
 
   return (
     <>
@@ -42,16 +45,42 @@ export default function Header() {
 
                 <div className="flex items-center space-x-4">
                   {/* Botão de Usuário com modal */}
-                  <button
-                    onClick={() => setIsModalOpen(true)}
-                    className="relative mr-8"
-                  >
+                  <div className="relative mr-8 group">
                     {isLoggedIn ? (
-                      <UserCheck className="w-6 h-6 text-green-500" />
+                      <div className="relative">
+                        <button className="relative">
+                          <UserCheck className="w-6 h-6 text-green-500" />
+                        </button>
+
+                        {/* Tooltip flutuante com detalhes */}
+                        <div className="absolute left-1/2 -translate-x-1/2 mt-3 w-52 bg-white shadow-xl rounded-xl border border-gray-200 z-50 opacity-0 group-hover:opacity-100 transition-all duration-200">
+                          <div className="p-4 text-sm">
+                            <h3 className="font-semibold text-gray-800 mb-1 text-base">👤 User Details</h3>
+                            <p className="text-gray-600 text-xs break-words">{user?.email}</p>
+                          </div>
+                          <div className="border-t px-4 py-2 bg-gray-50 rounded-b-xl">
+                            <button
+                              onClick={logoutUser}
+                              className="w-full text-sm text-red-500 hover:text-red-600 transition"
+                            >
+                              logout
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                     ) : (
-                      <UserX className="w-6 h-6 text-red-500" />
+                      <div className="relative group">
+                        <button onClick={() => setIsModalOpen(true)}>
+                          <UserX className="w-6 h-6 text-red-500" />
+                        </button>
+
+                        {/* Tooltip para não logado */}
+                        <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-black text-white text-xs font-medium rounded-md py-1.5 px-3 shadow-lg transition-opacity duration-200 opacity-0 group-hover:opacity-100 whitespace-nowrap z-50">
+                          Click to Connect
+                        </div>
+                      </div>
                     )}
-                  </button>
+                  </div>
 
                   {/* Botão do carrinho */}
                   <button onClick={() => setCartOpen(true)} className="relative">
