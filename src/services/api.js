@@ -70,3 +70,41 @@ export const executeLogin = async (email, senha) => {
     const data = await response.json();
     return data;
 }
+
+export const createUser = async (user) =>{
+  console.log(user)
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/usuario/salvar_cliente`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+      body: JSON.stringify(user),
+  });
+
+  if (!response.ok) {
+     throw new Error("Invalid Credentials");
+  }
+
+  const data = await response.json();
+  return data;
+}
+
+export const uploadImage = async (file) => {
+    const formData = new FormData();
+
+    if (file) {
+      formData.append('avatar', file);
+    }
+
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/envio_avatar/salvar`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await res.text();
+      return data;
+    } catch (err) {
+      console.error('Erro ao enviar:', err);
+    }
+}

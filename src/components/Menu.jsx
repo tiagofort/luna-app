@@ -39,7 +39,7 @@ export default function Header() {
 
                 <div className="hidden md:flex space-x-6 items-center">
                   <Link to="/" className="text-mainColor font-semibold hover:text-black">Home</Link>
-                  <Link to="/accessories" className="text-mainColor font-semibold hover:text-black">Accessories</Link>
+                  <Link to="/accessories/all" className="text-mainColor font-semibold hover:text-black">Accessories</Link>
                   <Link to="/about" className="text-mainColor font-semibold hover:text-black">About Us</Link>
                 </div>
 
@@ -105,7 +105,7 @@ export default function Header() {
             {/* Menu mobile aberto */}
             <Disclosure.Panel className="md:hidden px-4 pt-2 pb-3 space-y-1 bg-white">
               <Link to="/" className="block text-mainColor font-semibold hover:text-black">Home</Link>
-              <Link to="/accessories" className="block text-mainColor font-semibold hover:text-black">Accessories</Link>
+              <Link to="/accessories/all" className="block text-mainColor font-semibold hover:text-black">Accessories</Link>
               <Link to="/about" className="block text-mainColor font-semibold hover:text-black">About Us</Link>
             </Disclosure.Panel>
           </>

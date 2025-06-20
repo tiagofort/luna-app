@@ -10,6 +10,7 @@ import Loader from './components/Loader';
 import Cart from '../src/pages/Cart';
 import RegisterUser from './pages/RegisterUser';
 
+
 export default function App() {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
@@ -30,7 +31,7 @@ export default function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
-        <Route path="accessories" element={<Accessories />} />
+        <Route path="/accessories/:param" element={<Accessories />} />
         <Route path="cart" element={<Cart />} />
         <Route path="registeruser" element={<RegisterUser />} />
         <Route path="/item/:id" element={<ItemDetails />} />

@@ -2,8 +2,7 @@ import { useAuthContext } from '../context/AuthContext';
 import Banner from '../components/MainBanner';
 import MainCarosel from '../components/MainCarosel';
 import FeatureGrid from '../components/FeatureGrid';
-import { useNavigate } from 'react-router-dom';
-import { useLoading } from '../context/LoadingContext';
+import Crystals from '../components/Crystals';
 
 export default function Home() {
   const { user } = useAuthContext(); 
@@ -14,6 +13,7 @@ export default function Home() {
           <section className="p-4 text-center">
             <MainCarosel />
             <FeatureGrid />
+            <Crystals />
           </section>
         </main>
     );

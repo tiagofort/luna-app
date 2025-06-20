@@ -1,9 +1,69 @@
 import { useState } from "react";
 import { Eye, EyeOff, Camera } from "lucide-react";
+import { uploadImage, createUser } from "../services/api";
+import { useNavigate } from 'react-router-dom';
 
 const RegisterUser = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [file, setFile] = useState(null);
+  const navigate = useNavigate();
+
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [avatar, setAvatar] = useState("");
+
+  const handleFileChange = (e) => {
+    const selected = e.target.files[0];
+    if (selected) {
+      setFile(selected);
+    } else {
+      setFile(null);
+    }
+  };
+
+  const handleUpload = async () => {
+    if (!file) return null; // opcional
+    return await uploadImage(file);
+  };
+
+  const handleUser = async () => {
+    try {
+      // 1. Faz upload da imagem (se houver)
+      // const url = await handleUpload();
+      const url="";
+      setAvatar(url);
+
+      // 2. Monta o objeto com os dados do usuário, já com o avatar atualizado
+      const userData = {
+        nome: name,
+        sobrenome: surname,
+        email: email,
+        phone: phone,
+        senha: password,
+        avatar: url || "",
+      };
+
+      // 3. Envia os dados para criar o usuário
+      await createUser(userData);
+      console.log("User successfully created");
+      setName("");
+      setSurname("");
+      setEmail("");
+      setPhone("");
+      setPassword("");
+      setConfirmPassword("");
+      setAvatar("");
+      navigate('/')
+    } catch (error) {
+      // Erros do upload OU do cadastro
+      console.error("Failed to register user or upload image:", error);
+    }
+  };
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-2xl shadow-xl space-y-5">
@@ -16,6 +76,7 @@ const RegisterUser = () => {
           type="file"
           className="flex-1 border rounded-md px-3 py-2 text-sm file:hidden"
           placeholder="Avatar"
+          onChange={handleFileChange}
         />
       </div>
 
@@ -23,6 +84,8 @@ const RegisterUser = () => {
       <input
         type="text"
         placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
         className="w-full border rounded-md px-4 py-2 focus:ring-2 focus:ring-mainColor outline-none"
       />
 
@@ -30,6 +93,8 @@ const RegisterUser = () => {
       <input
         type="text"
         placeholder="Surname"
+        value={surname}
+        onChange={(e) => setSurname(e.target.value)}
         className="w-full border rounded-md px-4 py-2 focus:ring-2 focus:ring-mainColor outline-none"
       />
 
@@ -37,6 +102,8 @@ const RegisterUser = () => {
       <input
         type="email"
         placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         className="w-full border rounded-md px-4 py-2 focus:ring-2 focus:ring-mainColor outline-none"
       />
 
@@ -44,6 +111,8 @@ const RegisterUser = () => {
       <input
         type="tel"
         placeholder="Phone"
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
         className="w-full border rounded-md px-4 py-2 focus:ring-2 focus:ring-mainColor outline-none"
       />
 
@@ -52,6 +121,8 @@ const RegisterUser = () => {
         <input
           type={showPassword ? "text" : "password"}
           placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           className="w-full border rounded-md px-4 py-2 pr-10 focus:ring-2 focus:ring-mainColor outline-none"
         />
         <button
@@ -68,6 +139,8 @@ const RegisterUser = () => {
         <input
           type={showConfirm ? "text" : "password"}
           placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
           className="w-full border rounded-md px-4 py-2 pr-10 focus:ring-2 focus:ring-mainColor outline-none"
         />
         <button
@@ -83,12 +156,12 @@ const RegisterUser = () => {
       <button
         type="submit"
         className="w-full bg-mainColor text-white rounded-md py-2 font-semibold hover:bg-opacity-90 transition disabled:opacity-40"
-        disabled
+        onClick={handleUser}
       >
         CREATE
       </button>
     </div>
   );
-}
+};
 
 export default RegisterUser;

@@ -39,7 +39,7 @@ const FeatureGrid = () => {
               />
               <h3 className="text-xl font-semibold text-gray-800">{item.titulo}</h3>
               <p className="mt-1 text-sm text-gray-500">{item.pedra}</p>
-              <p className="mt-1 text-sm font-semibold text-gray-500">{formatCurrency(item.preco)}</p>
+              <p className="mt-1 text-sm font-semibold text-mainColor">{formatCurrency(item.preco)}</p>
             </Link>
           ))}
         </div>

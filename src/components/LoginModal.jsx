@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { executeLogin } from '../services/api';
 import { useAuthContext } from '../context/AuthContext';
 import { useNavigate  } from 'react-router-dom';
@@ -9,6 +9,13 @@ const LoginModal = ({ open, onClose }) => {
   const [password, setPassword] = useState("");
   const { loginUser } = useAuthContext();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!open) {
+      setEmail("");
+      setPassword("");
+    }
+  }, [open]);
 
   if (!open) return null;
 
