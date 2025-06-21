@@ -1,6 +1,6 @@
 // contexts/LoadingContext.jsx
 import React, { createContext, useContext, useState } from 'react';
-import LoadingOverlay from '../components/LoadingOverlay';
+import Loader from '../components/Loader';
 
 const LoadingContext = createContext();
 
@@ -10,7 +10,7 @@ export const LoadingProvider = ({ children }) => {
   return (
     <LoadingContext.Provider value={{ isLoading, setLoading: setIsLoading }}>
       {children}
-      {isLoading && <LoadingOverlay />}
+      {isLoading && <Loader />}
     </LoadingContext.Provider>
   );
 };

@@ -25,7 +25,7 @@ const CartDrawer = ({ open, onClose }) => {
 
       <div className="p-5 overflow-y-auto h-[calc(100%-170px)] space-y-4">
         {cart.length === 0 ? (
-          <p className="text-gray-500 text-center mt-10">Seu carrinho está vazio.</p>
+          <p className="text-gray-500 font-bold text-center mt-10">Seu carrinho está vazio.</p>
         ) : (
           cart.map((item, index) => (
             <div key={index} className="bg-gray-50 rounded-md p-4 shadow-sm hover:shadow-md transition">
@@ -64,7 +64,7 @@ const CartDrawer = ({ open, onClose }) => {
         </p>
 
         <Link to="/cart">
-          <button className="w-full mb-2 bg-mainColor text-white py-2 rounded-md font-medium hover:bg-mainColor/90 transition">
+          <button onClick={onClose} className="w-full mb-2 bg-mainColor text-white py-2 rounded-md font-medium hover:bg-mainColor/90 transition">
             Ver Carrinho
           </button>
         </Link>

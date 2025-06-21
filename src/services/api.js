@@ -108,3 +108,26 @@ export const uploadImage = async (file) => {
       console.error('Erro ao enviar:', err);
     }
 }
+
+export const createRequest = async (newRequest) => {
+try {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/venda/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newRequest)
+    });
+
+    if (!response.ok) {
+      throw new Error('Error to save');
+    }
+
+    const data = await response.json();
+    console.log('Request saved', data);
+    return data;
+  } catch (error) {
+    console.error('Error to save', error);
+    return null;
+  }
+}

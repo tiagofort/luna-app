@@ -2,11 +2,16 @@ import { useState } from "react";
 import { Eye, EyeOff, Camera } from "lucide-react";
 import { uploadImage, createUser } from "../services/api";
 import { useNavigate } from 'react-router-dom';
+import CenterWarningDialog from "../components/CenterWarningDialog";
 
 const RegisterUser = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [file, setFile] = useState(null);
+  const [dialogVisible, setDialogVisible] = useState(false);
+  const [dialogTitle, setDialogTitle] = useState("");
+  const [dialogMessage, setDialogMessage] = useState("");
+  const [dialogButton, setDialogButton] = useState("");
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -24,6 +29,13 @@ const RegisterUser = () => {
     } else {
       setFile(null);
     }
+  };
+
+  const showDialog = (title, message, button) => {
+    setDialogTitle(title);
+    setDialogMessage(message);
+    setDialogButton(button);
+    setDialogVisible(true);
   };
 
   const handleUpload = async () => {
@@ -58,10 +70,12 @@ const RegisterUser = () => {
       setPassword("");
       setConfirmPassword("");
       setAvatar("");
-      navigate('/')
+
+      showDialog("Success", "User successfully registered! An email was sent to the email you used to register! Please, follow the steps on it.", "Got it!");
     } catch (error) {
       // Erros do upload OU do cadastro
       console.error("Failed to register user or upload image:", error);
+      showDialog("Error", "Failed to register user. Please try again.", "Got it!");
     }
   };
 
@@ -160,6 +174,18 @@ const RegisterUser = () => {
       >
         CREATE
       </button>
+
+      {dialogVisible && (
+        <CenterWarningDialog
+          title={dialogTitle}
+          message={dialogMessage}
+          onClose={() => {
+            setDialogVisible(false);
+            if (dialogTitle === "Success") navigate('/');
+          }}
+          buttonMessage={dialogButton}
+        />
+      )}
     </div>
   );
 };

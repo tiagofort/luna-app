@@ -79,28 +79,28 @@ const Accessories = () => {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <input
           type="text"
-          placeholder="Stone"
+          placeholder="Stone. e.g:Agate"
           value={stoneFilter}
           onChange={(e) => setStoneFilter(e.target.value)}
           className="border p-2 rounded"
         />
         <input
           type="text"
-          placeholder="Type"
+          placeholder="Type. e.g:Earing"
           value={typeFilter}
           onChange={(e) => setTypeFilter(e.target.value)}
           className="border p-2 rounded"
         />
         <input
           type="text"
-          placeholder="Material"
+          placeholder="Material. e.g:Silver Plated"
           value={materialFilter}
           onChange={(e) => setMaterialFilter(e.target.value)}
           className="border p-2 rounded"
         />
         <input
           type="number"
-          placeholder="Max Price"
+          placeholder="Max Price. e.g:25"
           value={priceFilter}
           onChange={(e) => setPriceFilter(e.target.value)}
           className="border p-2 rounded"
@@ -121,7 +121,7 @@ const Accessories = () => {
               className="w-full h-40 object-contain rounded bg-gray-100"
             />
             <h3 className="mt-2 text-lg font-semibold">{item.titulo}</h3>
-            <p className="text-sm text-gray-500">{item.tipo} · {item.pedra}</p>
+            <p className="text-sm text-gray-500">{item.tipo} · {item.pedra} · {item.material}</p>
             <p className="text-mainColor font-bold mt-1">${item.preco}</p>
           </div>
         ))}
