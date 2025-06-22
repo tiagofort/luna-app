@@ -1,1 +1,1 @@
-web: node server.js
+bin/start-nginx-solo
