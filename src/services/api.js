@@ -111,7 +111,7 @@ export const uploadImage = async (file) => {
 
 export const createRequest = async (newRequest) => {
 try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/venda/`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/pedido/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

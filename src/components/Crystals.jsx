@@ -4,7 +4,7 @@ import amazonite from '../assets/crystals/amazonite.png';
 import amethyst from '../assets/crystals/amethyst.png';
 import apatite from '../assets/crystals/apatite.png';
 import aquamarine from '../assets/crystals/aquamarine.png';
-import black_turmaline from '../assets/crystals/black_turmaline.png';
+import black_Tourmaline from '../assets/crystals/black_turmaline.png';
 import crystal_quartz from '../assets/crystals/crystal_quartz.png';
 import onyx from '../assets/crystals/onyx.png';
 import pink_quartz from '../assets/crystals/pink_quartz.png';
@@ -20,14 +20,14 @@ const crystals = [
   { id: 3, name: "Amethyst", image: amethyst },
   { id: 4, name: "Apatite", image: apatite },
   { id: 5, name: "Aquamarine", image: aquamarine },
-  { id: 6, name: "Lapis Lazuli", image: black_turmaline },
-  { id: 7, name: "Turquoise", image: crystal_quartz },
-  { id: 8, name: "Tiger's Eye", image: onyx },
-  { id: 9, name: "Jade", image: pink_quartz },
-  { id: 10, name: "Malachite", image: pyrite },
-  { id: 11, name: "Moonstone", image: selenite },
-  { id: 12, name: "Carnelian", image: sodalite },
-  { id: 13, name: "Sodalite", image: white_quartz },
+  { id: 6, name: "Black Tourmaline", image: black_Tourmaline },
+  { id: 7, name: "Crystal Quartz", image: crystal_quartz },
+  { id: 8, name: "Onyx", image: onyx },
+  { id: 9, name: "Rose Quartz", image: pink_quartz },
+  { id: 10, name: "Pyrite", image: pyrite },
+  { id: 11, name: "Selenite", image: selenite },
+  { id: 12, name: "Sodalite", image: sodalite },
+  { id: 13, name: "White Quartz", image: white_quartz },
 ];
 
 const CrystalCatalog = () => {
