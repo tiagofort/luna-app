@@ -25,7 +25,15 @@ const Cart = () => {
     setDialogVisible(true);
   };
 
-  const handleRequest = async () =>{
+  const handleRequest = async () => {
+    if (!user) {
+      showDialog(
+        "Login is Required",
+        "You must be logged in to submit a request. Please log in or create an account. Click on the user icon at the top of the page.",
+        "Got it!"
+      );
+      return;
+    }
     const items = cart.map(item => ({
       item: item._id,
       quantidade: item.quantity
@@ -36,11 +44,19 @@ const Cart = () => {
     }
     try{
       await createRequest(requestData);
-      showDialog("Request Sent!", "Your Request was sent. Our team will contact you from here! Thank you!", "Got it!");
+      showDialog(
+        "Request Sent!",
+        "Your Request was sent. Our team will contact you from here! Thank you!",
+        "Got it!"
+      );
       clearCart();
     }catch(error){
       console.log("Error to save: " + error);
-      showDialog("Problem", "Something went wrong. Try again or contact our support team", "Got it!");
+      showDialog(
+        "Problem",
+        "Something went wrong. Try again or contact our support team",
+        "Got it!"
+      );
     } 
   }
 

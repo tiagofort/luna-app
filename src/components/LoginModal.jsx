@@ -1,14 +1,26 @@
 import { useState, useEffect } from "react";
 import { executeLogin } from '../services/api';
 import { useAuthContext } from '../context/AuthContext';
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import CenterWarningDialog from '../components/CenterWarningDialog';
 import { X } from 'lucide-react';
 
 const LoginModal = ({ open, onClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [dialogVisible, setDialogVisible] = useState(false);
+  const [dialogTitle, setDialogTitle] = useState("");
+  const [dialogMessage, setDialogMessage] = useState("");
+  const [dialogButton, setDialogButton] = useState("");
   const { loginUser } = useAuthContext();
   const navigate = useNavigate();
+
+  const showDialog = (title, message, button) => {
+    setDialogTitle(title);
+    setDialogMessage(message);
+    setDialogButton(button);
+    setDialogVisible(true);
+  };
 
   useEffect(() => {
     if (!open) {
@@ -45,8 +57,9 @@ const LoginModal = ({ open, onClose }) => {
               loginUser(userData);
               setEmail('');
               setPassword('');
-              onClose();
+              showDialog("Welcome back!", "You are logged in!", "Got it!");
             } catch (err) {
+              showDialog("Something Went Wrong", "Email or password do not match! Please, make sure you are registered.", "Got it!");
               console.log(err.message);
             }
           }}
@@ -94,6 +107,19 @@ const LoginModal = ({ open, onClose }) => {
           </div>
         </form>
       </div>
+      {dialogVisible && (
+        <CenterWarningDialog
+          title={dialogTitle}
+          message={dialogMessage}
+          onClose={() => {
+            setDialogVisible(false);
+            if (dialogTitle === "Welcome back!") {
+              onClose();
+            }
+          }}
+            buttonMessage={dialogButton}
+        />
+      )}
     </div>
   );
 };
