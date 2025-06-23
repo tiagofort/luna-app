@@ -44,7 +44,7 @@ export default function Header() {
                 </div>
 
                 <div className="flex items-center space-x-4">
-                  {/* Botão de Usuário com modal */}
+                  
                   <div className="relative mr-8 group">
                     {isLoggedIn ? (
                       <div className="relative">
@@ -52,7 +52,7 @@ export default function Header() {
                           <UserCheck className="w-6 h-6 text-green-500" />
                         </button>
 
-                        {/* Tooltip flutuante com detalhes */}
+                        
                         <div className="absolute left-1/2 -translate-x-1/2 mt-3 w-52 bg-white shadow-xl rounded-xl border border-gray-200 z-50 opacity-0 group-hover:opacity-100 transition-all duration-200">
                           <div className="p-4 text-sm">
                             <h3 className="font-semibold text-gray-800 mb-1 text-base">👤 User Details</h3>
@@ -74,7 +74,7 @@ export default function Header() {
                           <UserX className="w-6 h-6 text-red-500" />
                         </button>
 
-                        {/* Tooltip para não logado */}
+                        
                         <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-black text-white text-xs font-medium rounded-md py-1.5 px-3 shadow-lg transition-opacity duration-200 opacity-0 group-hover:opacity-100 whitespace-nowrap z-50">
                           Click to Connect
                         </div>
@@ -82,7 +82,7 @@ export default function Header() {
                     )}
                   </div>
 
-                  {/* Botão do carrinho */}
+                  
                   <button onClick={() => setCartOpen(true)} className="relative">
                     <ShoppingCart className="w-6 h-6 text-mainColor" />
                     {totalItems > 0 && (
@@ -92,7 +92,7 @@ export default function Header() {
                     )}
                   </button>
 
-                  {/* Menu mobile */}
+                  
                   <div className="md:hidden">
                     <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-mainColor hover:text-black focus:outline-none">
                       {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -102,7 +102,7 @@ export default function Header() {
               </div>
             </div>
 
-            {/* Menu mobile aberto */}
+            
             <Disclosure.Panel className="md:hidden px-4 pt-2 pb-3 space-y-1 bg-white">
               <Link to="/" className="block text-mainColor font-semibold hover:text-black">Home</Link>
               <Link to="/accessories/all" className="block text-mainColor font-semibold hover:text-black">Accessories</Link>
@@ -112,10 +112,7 @@ export default function Header() {
         )}
       </Disclosure>
 
-      {/* Drawer do carrinho */}
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
-
-      {/* Modal de login */}
       <LoginModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );

@@ -1,4 +1,3 @@
-// src/hooks/useAuth.js
 import { useState } from 'react';
 import { login } from '../services/auth';
 import { useAuthContext } from '../context/AuthContext';

@@ -1,7 +1,7 @@
 import { useCart } from "../context/CartContext";
 import { formatCurrency } from "../services/utils";
 import { Link } from 'react-router-dom';
-import { Trash2 } from "lucide-react"; // ícone moderno
+import { Trash2 } from "lucide-react";
 
 const CartDrawer = ({ open, onClose }) => {
   const { cart, removeFromCart } = useCart();
@@ -43,7 +43,7 @@ const CartDrawer = ({ open, onClose }) => {
                   </div>
                   <button
                     onClick={(e) => {
-                      e.preventDefault(); // previne navegação
+                      e.preventDefault();
                       removeFromCart(index);
                     }}
                     className="text-red-500 hover:text-red-700 transition"

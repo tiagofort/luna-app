@@ -34,7 +34,7 @@ const LoginModal = ({ open, onClose }) => {
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 relative border border-gray-200">
-        {/* Botão fechar */}
+       
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition"
@@ -42,13 +42,13 @@ const LoginModal = ({ open, onClose }) => {
           <X className="w-5 h-5" />
         </button>
 
-        {/* Título */}
+     
         <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
           👋 Welcome Back
           <p className="text-sm text-gray-500 mt-1">Do Your Login to continue</p>
         </h2>
 
-        {/* Formulário */}
+        
         <form
           onSubmit={async (e) => {
             e.preventDefault();

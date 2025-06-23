@@ -1,4 +1,3 @@
-// contexts/LoadingContext.jsx
 import React, { createContext, useContext, useState } from 'react';
 import Loader from '../components/Loader';
 

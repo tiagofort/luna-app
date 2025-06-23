@@ -39,18 +39,15 @@ const RegisterUser = () => {
   };
 
   const handleUpload = async () => {
-    if (!file) return null; // opcional
+    if (!file) return null; 
     return await uploadImage(file);
   };
 
   const handleUser = async () => {
     try {
-      // 1. Faz upload da imagem (se houver)
-      // const url = await handleUpload();
       const url="";
       setAvatar(url);
 
-      // 2. Monta o objeto com os dados do usuário, já com o avatar atualizado
       const userData = {
         nome: name,
         sobrenome: surname,
@@ -60,7 +57,6 @@ const RegisterUser = () => {
         avatar: url || "",
       };
 
-      // 3. Envia os dados para criar o usuário
       await createUser(userData);
       console.log("User successfully created");
       setName("");
@@ -73,7 +69,6 @@ const RegisterUser = () => {
 
       showDialog("Success", "User successfully registered! An email was sent to the email you used to register! Please, follow the steps on it.", "Got it!");
     } catch (error) {
-      // Erros do upload OU do cadastro
       console.error("Failed to register user or upload image:", error);
       showDialog("Error", "Failed to register user. Please try again.", "Got it!");
     }
@@ -81,7 +76,7 @@ const RegisterUser = () => {
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-2xl shadow-xl space-y-5">
-      {/* Avatar Upload */}
+
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-full bg-gray-100 border flex items-center justify-center text-gray-500">
           <Camera className="w-5 h-5" />
@@ -94,7 +89,7 @@ const RegisterUser = () => {
         />
       </div>
 
-      {/* Name */}
+      
       <input
         type="text"
         placeholder="Name"
@@ -103,7 +98,7 @@ const RegisterUser = () => {
         className="w-full border rounded-md px-4 py-2 focus:ring-2 focus:ring-mainColor outline-none"
       />
 
-      {/* Surname */}
+    
       <input
         type="text"
         placeholder="Surname"
@@ -112,7 +107,7 @@ const RegisterUser = () => {
         className="w-full border rounded-md px-4 py-2 focus:ring-2 focus:ring-mainColor outline-none"
       />
 
-      {/* Email */}
+      
       <input
         type="email"
         placeholder="Email"
@@ -121,7 +116,7 @@ const RegisterUser = () => {
         className="w-full border rounded-md px-4 py-2 focus:ring-2 focus:ring-mainColor outline-none"
       />
 
-      {/* Phone */}
+      
       <input
         type="tel"
         placeholder="Phone"
@@ -130,7 +125,7 @@ const RegisterUser = () => {
         className="w-full border rounded-md px-4 py-2 focus:ring-2 focus:ring-mainColor outline-none"
       />
 
-      {/* Password */}
+      
       <div className="relative">
         <input
           type={showPassword ? "text" : "password"}
@@ -148,7 +143,7 @@ const RegisterUser = () => {
         </button>
       </div>
 
-      {/* Confirm Password */}
+      
       <div className="relative">
         <input
           type={showConfirm ? "text" : "password"}
@@ -166,7 +161,7 @@ const RegisterUser = () => {
         </button>
       </div>
 
-      {/* Submit */}
+      
       <button
         type="submit"
         className="w-full bg-mainColor text-white rounded-md py-2 font-semibold hover:bg-opacity-90 transition disabled:opacity-40"

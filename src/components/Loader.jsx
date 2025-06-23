@@ -1,4 +1,4 @@
-// src/components/Loader.jsx
+
 import logo from '../assets/favicon.png';
 
 const Loader = () => {

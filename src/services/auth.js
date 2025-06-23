@@ -1,4 +1,3 @@
-// src/api/auth.js
 export const login = async (email, password) => {
   const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
     method: 'POST',
@@ -11,7 +10,7 @@ export const login = async (email, password) => {
     throw new Error(error.message || 'Login failed');
   }
 
-  return response.json(); // assuming it returns token/user info
+  return response.json();
 };
 
 

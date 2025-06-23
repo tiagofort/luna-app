@@ -1,4 +1,3 @@
-
 const Dialog = ({ title, message, onClose }) => {
   return (
     <div className="fixed top-4 right-4 bg-white shadow-lg border border-gray-300 rounded p-4 z-50">

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams, useNavigate } from "react-router-dom";
-import { Search, DollarSign, Tag, Gem } from "lucide-react"; // usando lucide-react para ícones
+import { Search, DollarSign, Tag, Gem } from "lucide-react";
 import { formatCurrency } from "../services/utils";
 
 const Accessories = () => {
@@ -77,7 +77,7 @@ const Accessories = () => {
     <div className="p-6 max-w-7xl mx-auto space-y-8">
       <h1 className="text-3xl font-bold text-mainColor tracking-tight">Accessories</h1>
 
-      {/* Filtros */}
+      
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="relative">
           <Gem className="absolute left-3 top-3 text-gray-400" size={18} />
@@ -121,7 +121,7 @@ const Accessories = () => {
         </div>
       </div>
 
-      {/* Lista de Itens */}
+      
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {currentItems.map((item) => (
           <div
@@ -143,7 +143,7 @@ const Accessories = () => {
         ))}
       </div>
 
-      {/* Paginação */}
+      
       <div className="flex justify-center gap-2 mt-6 flex-wrap">
         {Array.from({ length: totalPages }, (_, index) => (
           <button

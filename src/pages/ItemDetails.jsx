@@ -30,7 +30,7 @@ const handleAddToCart = (item, quantity) => {
       try {
         const response = await getItemById(id);
         setItem(response);
-        setMainImage(response.midia?.url1); // ✅ usa response direto
+        setMainImage(response.midia?.url1);
       } catch (error) {
         console.error('Erro ao buscar imagens:', error.message);
       }

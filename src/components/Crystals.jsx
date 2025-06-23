@@ -13,7 +13,7 @@ import selenite from '../assets/crystals/selenite.png';
 import sodalite from '../assets/crystals/agate.png';
 import white_quartz from '../assets/crystals/white_quartz.png';
 
-// Exemplo de dados. Você pode substituir pelos seus.
+
 const crystals = [
   { id: 1, name: "Agate", image: agate },
   { id: 2, name: "Amazonite", image: amazonite },
@@ -21,7 +21,7 @@ const crystals = [
   { id: 4, name: "Apatite", image: apatite },
   { id: 5, name: "Aquamarine", image: aquamarine },
   { id: 6, name: "Black Tourmaline", image: black_Tourmaline },
-  { id: 7, name: "Crystal Quartz", image: crystal_quartz },
+  { id: 7, name: "Crytal Quartz", image: crystal_quartz },
   { id: 8, name: "Onyx", image: onyx },
   { id: 9, name: "Rose Quartz", image: pink_quartz },
   { id: 10, name: "Pyrite", image: pyrite },
@@ -44,10 +44,10 @@ const CrystalCatalog = () => {
         {crystals.map((crystal) => (
           <div
             key={crystal.id}
-            onClick={() => handleClick(crystal)}
+            onClick={() => navigate(`/stone/${crystal.name}`)}
             className="flex flex-col items-center cursor-pointer group"
           >
-            <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-mainColor shadow-sm group-hover:shadow-md transition">
+           <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-mainColor shadow-sm group-hover:shadow-md transition">
               <img
                 src={crystal.image}
                 alt={crystal.name}
