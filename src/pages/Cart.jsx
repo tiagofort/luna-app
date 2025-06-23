@@ -4,9 +4,11 @@ import { formatCurrency } from "../services/utils";
 import { useAuthContext } from "../context/AuthContext";
 import { createRequest } from "../services/api";
 import CenterWarningDialog from "../components/CenterWarningDialog";
+import ConfirmDialog from "../components/ConfirmDialog";
 
 const Cart = () => {
   const [dialogVisible, setDialogVisible] = useState(false);
+  const [confirmDialogVisible, setConfirmDialogVisible] = useState(false);
   const [dialogTitle, setDialogTitle] = useState("");
   const [dialogMessage, setDialogMessage] = useState("");
   const [dialogButton, setDialogButton] = useState("");
@@ -23,6 +25,19 @@ const Cart = () => {
     setDialogMessage(message);
     setDialogButton(button);
     setDialogVisible(true);
+  };
+
+  const handleSubmit = () => {
+    setConfirmDialogVisible(true);
+  };
+
+  const confirmRequest = () => {
+    handleRequest();
+    setConfirmDialogVisible(false);
+  };
+
+  const cancelRequest = () => {
+    setConfirmDialogVisible(false);
   };
 
   const handleRequest = async () => {
@@ -120,7 +135,7 @@ return (
                 Total: {formatCurrency(total)}
               </p>
               <button
-                onClick={handleRequest}
+                onClick={handleSubmit}
                 className="mt-2 w-full md:w-auto bg-[#b86935] text-white px-6 py-3 rounded hover:bg-[#9c5929]"
               >
                 Submit Request
@@ -139,6 +154,15 @@ return (
               if (dialogTitle === "Success") navigate('/');
             }}
             buttonMessage={dialogButton}
+        />
+      )}
+
+      {confirmDialogVisible && (
+        <ConfirmDialog
+          title="Would you like to proceed with your request?"
+          message=""
+          onConfirm={confirmRequest}
+          onCancel={cancelRequest}
         />
       )}
     </div>

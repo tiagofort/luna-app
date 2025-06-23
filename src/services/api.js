@@ -124,7 +124,6 @@ try {
     }
 
     const data = await response.json();
-    console.log('Request saved', data);
     return data;
   } catch (error) {
     console.error('Error to save', error);

@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getWhatsNew } from '../services/api';
 import { formatCurrency } from '../services/utils';
+import { useNavigate } from "react-router-dom";
 
 const FeatureGrid = () => {
+  const navigate = useNavigate();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -34,11 +36,11 @@ const FeatureGrid = () => {
               to={`/item/${item._id}`}
               className="bg-white shadow-md rounded-xl p-4 border flex flex-col items-center text-center hover:shadow-lg transition duration-300 hover:scale-105"
             >
-              <div className="w-full aspect-[4/5] mb-3">
+              <div className="w-full aspect-[4/5] mb-3 overflow-hidden rounded-md">
                 <img
                   src={item.midia.url1}
                   alt={item.titulo}
-                  className="w-full h-full object-cover rounded-md"
+                  className="w-full h-full object-cover"
                 />
               </div>
               <h3 className="text-sm sm:text-base font-semibold text-gray-800 leading-tight">
@@ -51,6 +53,33 @@ const FeatureGrid = () => {
             </Link>
           ))}
         </div>
+
+        {/* Botão centralizado com efeito */}
+        <button
+          onClick={() => {  navigate('/accessories/all')}}
+          className="
+            relative
+            mt-10
+            px-8 py-3
+            rounded-xl
+            border border-mainColor
+            bg-mainColor
+            text-white
+            font-semibold
+            overflow-hidden
+            transition-colors duration-500
+            before:absolute before:top-0 before:left-0 before:w-full before:h-full
+            before:bg-gradient-to-br before:from-mainColor before:to-transparent
+            before:origin-top-left
+            before:transition-transform before:duration-700
+            before:z-0
+            hover:text-mainColor
+            hover:bg-transparent
+            hover:before:-translate-x-full hover:before:-translate-y-full
+          "
+        >
+          <span className="relative z-10">Ver mais</span>
+        </button>
       </div>
     </section>
   );
