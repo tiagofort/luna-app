@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { getStones } from '../services/api';
 
 export default function StoneDetail() {
   const { param } = useParams();
@@ -9,17 +10,9 @@ export default function StoneDetail() {
 
   useEffect(() => {
   const fetchStone = async () => {
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/stone/buscar_pedra/${param}`);
-      if (!response.ok) throw new Error("Erro na requisição");
-
-      const data = await response.json();
-      setStone(data);
-    } catch (err) {
-      setError("Error to load stone");
-    } finally {
-      setLoading(false);
-    }
+    const data = await getStones(param);
+    setStone(data);
+    setLoading(false);
   };
 
   fetchStone();

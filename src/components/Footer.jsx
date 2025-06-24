@@ -5,7 +5,7 @@ import { Camera } from "lucide-react";
       <section style={{ backgroundColor: '#b86935', color: 'white' }}>
         <div className="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
           <nav className="flex flex-wrap justify-center -mx-5 -my-2">
-            {["About", "Blog", "Team", "Pricing"].map((item) => (
+            {["FAQ", "Contact"].map((item) => (
               <div key={item} className="px-5 py-2">
                 <a href="#" className="text-base leading-6 text-white-500 hover:text-gray-900">
                   {item}
@@ -14,7 +14,12 @@ import { Camera } from "lucide-react";
             ))}
           </nav>
           <div className="flex justify-center mt-8 space-x-6">
-            <a href="#" className="text-white-400 hover:text-gray-500" aria-label="Instagram">
+            <a 
+              href="https://www.instagram.com/lunacrystals.ie/" 
+              rel="noopener noreferrer" 
+              target="_blank" 
+              className="text-white-400 hover:text-gray-500" 
+              aria-label="Instagram">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path
                     fillRule="evenodd"

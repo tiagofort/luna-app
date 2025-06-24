@@ -43,30 +43,32 @@ const Accessories = () => {
   }, [param]);
 
   useEffect(() => {
-    let filteredItems = items;
+  let filteredItems = items;
 
-    if (stoneFilter) {
-      filteredItems = filteredItems.filter((i) =>
-        i.pedra?.toLowerCase().includes(stoneFilter.toLowerCase())
-      );
-    }
-    if (typeFilter) {
-      filteredItems = filteredItems.filter((i) =>
-        i.tipo?.toLowerCase().includes(typeFilter.toLowerCase())
-      );
-    }
-    if (materialFilter) {
-      filteredItems = filteredItems.filter((i) =>
-        i.material?.toLowerCase().includes(materialFilter.toLowerCase())
-      );
-    }
-    if (priceFilter) {
-      filteredItems = filteredItems.filter((i) => i.preco <= parseFloat(priceFilter));
-    }
+  if (stoneFilter) {
+    filteredItems = filteredItems.filter((i) =>
+      i.pedra?.toLowerCase().includes(stoneFilter.toLowerCase())
+    );
+  }
+  if (typeFilter) {
+    filteredItems = filteredItems.filter((i) =>
+      i.tipo?.toLowerCase().includes(typeFilter.toLowerCase())
+    );
+  }
+  if (materialFilter) {
+    filteredItems = filteredItems.filter((i) =>
+      i.material?.toLowerCase().includes(materialFilter.toLowerCase())
+    );
+  }
+  if (priceFilter) {
+    filteredItems = filteredItems.filter((i) => i.preco <= parseFloat(priceFilter));
+  }
 
-    setFiltered(filteredItems);
-    setSearchParams({ page: currentPage });
-  }, [stoneFilter, typeFilter, materialFilter, priceFilter, items]);
+  setFiltered(filteredItems);
+
+  setCurrentPage(1);
+  setSearchParams({ page: 1 });
+}, [stoneFilter, typeFilter, materialFilter, priceFilter, items]);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;

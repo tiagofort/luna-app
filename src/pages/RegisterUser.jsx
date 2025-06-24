@@ -24,11 +24,7 @@ const RegisterUser = () => {
 
   const handleFileChange = (e) => {
     const selected = e.target.files[0];
-    if (selected) {
-      setFile(selected);
-    } else {
-      setFile(null);
-    }
+    setFile(selected || null);
   };
 
   const showDialog = (title, message, button) => {
@@ -39,28 +35,36 @@ const RegisterUser = () => {
   };
 
   const handleUpload = async () => {
-    if (!file) return null; 
+    if (!file) return null;
     return await uploadImage(file);
   };
 
   const handleUser = async () => {
-    try {
+    if (!name || !surname || !email || !phone || !password || !confirmPassword) {
+      showDialog("Validation Error", "All fields are required. Please fill out the entire form.", "OK");
+      return;
+    }
 
-      
+    if (password !== confirmPassword) {
+      showDialog("Password Mismatch", "Passwords do not match. Please try again.", "OK");
+      return;
+    }
+
+    try {
       const url = await handleUpload();
       setAvatar(url);
 
       const userData = {
         nome: name,
         sobrenome: surname,
-        email: email,
-        phone: phone,
+        email,
+        phone,
         senha: password,
         avatar: url || "",
       };
 
       await createUser(userData);
-      console.log("User successfully created");
+
       setName("");
       setSurname("");
       setEmail("");
@@ -69,7 +73,11 @@ const RegisterUser = () => {
       setConfirmPassword("");
       setAvatar("");
 
-      showDialog("Success", "User successfully registered! An email was sent to the email you used to register! Please, follow the steps on it.", "Got it!");
+      showDialog(
+        "Success",
+        "User successfully registered! An email was sent to the email you used to register! Please, follow the steps on it.",
+        "Got it!"
+      );
     } catch (error) {
       console.error("Failed to register user or upload image:", error);
       showDialog("Error", "Failed to register user. Please try again.", "Got it!");
@@ -78,7 +86,7 @@ const RegisterUser = () => {
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-2xl shadow-xl space-y-5">
-
+    
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-full bg-gray-100 border flex items-center justify-center text-gray-500">
           <Camera className="w-5 h-5" />
@@ -86,12 +94,10 @@ const RegisterUser = () => {
         <input
           type="file"
           className="flex-1 border rounded-md px-3 py-2 text-sm file:hidden"
-          placeholder="Avatar"
           onChange={handleFileChange}
         />
       </div>
 
-      
       <input
         type="text"
         placeholder="Name"
@@ -99,8 +105,6 @@ const RegisterUser = () => {
         onChange={(e) => setName(e.target.value)}
         className="w-full border rounded-md px-4 py-2 focus:ring-2 focus:ring-mainColor outline-none"
       />
-
-    
       <input
         type="text"
         placeholder="Surname"
@@ -108,8 +112,6 @@ const RegisterUser = () => {
         onChange={(e) => setSurname(e.target.value)}
         className="w-full border rounded-md px-4 py-2 focus:ring-2 focus:ring-mainColor outline-none"
       />
-
-      
       <input
         type="email"
         placeholder="Email"
@@ -117,8 +119,6 @@ const RegisterUser = () => {
         onChange={(e) => setEmail(e.target.value)}
         className="w-full border rounded-md px-4 py-2 focus:ring-2 focus:ring-mainColor outline-none"
       />
-
-      
       <input
         type="tel"
         placeholder="Phone"
@@ -145,7 +145,6 @@ const RegisterUser = () => {
         </button>
       </div>
 
-      
       <div className="relative">
         <input
           type={showConfirm ? "text" : "password"}
@@ -163,7 +162,6 @@ const RegisterUser = () => {
         </button>
       </div>
 
-      
       <button
         type="submit"
         className="w-full bg-mainColor text-white rounded-md py-2 font-semibold hover:bg-opacity-90 transition disabled:opacity-40"

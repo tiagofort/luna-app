@@ -1,17 +1,17 @@
 import { useNavigate } from "react-router-dom";
-import agate from '../assets/crystals/agate.png';
-import amazonite from '../assets/crystals/amazonite.png';
-import amethyst from '../assets/crystals/amethyst.png';
-import apatite from '../assets/crystals/apatite.png';
-import aquamarine from '../assets/crystals/aquamarine.png';
-import black_Tourmaline from '../assets/crystals/black_turmaline.png';
-import crystal_quartz from '../assets/crystals/crystal_quartz.png';
-import onyx from '../assets/crystals/onyx.png';
-import pink_quartz from '../assets/crystals/pink_quartz.png';
-import pyrite from '../assets/crystals/pyrite.png';
-import selenite from '../assets/crystals/selenite.png';
-import sodalite from '../assets/crystals/agate.png';
-import white_quartz from '../assets/crystals/white_quartz.png';
+import agate from '../assets/crystals/agate.webp';
+import amazonite from '../assets/crystals/amazonite.webp';
+import amethyst from '../assets/crystals/amethyst.webp';
+import apatite from '../assets/crystals/apatite.webp';
+import aquamarine from '../assets/crystals/aquamarine.webp';
+import black_Tourmaline from '../assets/crystals/black_turmaline.webp';
+import crystal_quartz from '../assets/crystals/crystal_quartz.webp';
+import onyx from '../assets/crystals/onyx.webp';
+import pink_quartz from '../assets/crystals/pink_quartz.webp';
+import pyrite from '../assets/crystals/pyrite.webp';
+import selenite from '../assets/crystals/selenite.webp';
+import sodalite from '../assets/crystals/agate.webp';
+import white_quartz from '../assets/crystals/white_quartz.webp';
 
 
 const crystals = [

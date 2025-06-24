@@ -109,7 +109,7 @@ export const uploadImage = async (file) => {
 }
 
 export const createRequest = async (newRequest) => {
-try {
+  try {
     const response = await fetch(`${import.meta.env.VITE_API_URL}/pedido/`, {
       method: 'POST',
       headers: {
@@ -125,6 +125,18 @@ try {
     const data = await response.json();
     return data;
   } catch (error) {
+    console.error('Error to save', error);
+    return null;
+  }
+}
+
+export const getStones = async (param) =>{
+  try{
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/stone/buscar_pedra/${param}`);
+      if (!response.ok) throw new Error("Erro na requisição");
+    const data = await response.json();
+    return data;
+  }catch(error){
     console.error('Error to save', error);
     return null;
   }
