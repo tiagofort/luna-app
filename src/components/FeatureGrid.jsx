@@ -53,8 +53,6 @@ const FeatureGrid = () => {
             </Link>
           ))}
         </div>
-
-        {/* Botão centralizado com efeito */}
         <button
           onClick={() => {  navigate('/accessories/all')}}
           className="

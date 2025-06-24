@@ -72,7 +72,6 @@ export const executeLogin = async (email, senha) => {
 }
 
 export const createUser = async (user) =>{
-  console.log(user)
   const response = await fetch(`${import.meta.env.VITE_API_URL}/usuario/salvar_cliente`, {
     method: "POST",
     headers: {

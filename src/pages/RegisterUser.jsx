@@ -45,7 +45,9 @@ const RegisterUser = () => {
 
   const handleUser = async () => {
     try {
-      const url="";
+
+      
+      const url = await handleUpload();
       setAvatar(url);
 
       const userData = {
