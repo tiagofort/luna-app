@@ -19,13 +19,13 @@ const CartDrawer = ({ open, onClose }) => {
       } rounded-l-xl overflow-hidden`}
     >
       <div className="flex justify-between items-center px-5 py-4 border-b">
-        <h2 className="text-xl font-bold text-gray-800">🛒 Seu Carrinho</h2>
+        <h2 className="text-xl font-bold text-gray-800">🛒 Your cart</h2>
         <button onClick={onClose} className="text-gray-500 text-xl hover:text-black transition">✕</button>
       </div>
 
       <div className="p-5 overflow-y-auto h-[calc(100%-170px)] space-y-4">
         {cart.length === 0 ? (
-          <p className="text-gray-500 font-bold text-center mt-10">Seu carrinho está vazio.</p>
+          <p className="text-gray-500 font-bold text-center mt-10">Your cart is empty.</p>
         ) : (
           cart.map((item, index) => (
             <div key={index} className="bg-gray-50 rounded-md p-4 shadow-sm hover:shadow-md transition">
@@ -65,7 +65,7 @@ const CartDrawer = ({ open, onClose }) => {
 
         <Link to="/cart">
           <button onClick={onClose} className="w-full mb-2 bg-mainColor text-white py-2 rounded-md font-medium hover:bg-mainColor/90 transition">
-            Ver Carrinho
+            Open cart
           </button>
         </Link>
       </div>
