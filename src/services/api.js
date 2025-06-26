@@ -133,10 +133,22 @@ export const createRequest = async (newRequest) => {
 export const getStones = async (param) =>{
   try{
     const response = await fetch(`${import.meta.env.VITE_API_URL}/stone/buscar_pedra/${param}`);
-      if (!response.ok) throw new Error("Erro na requisição");
+    if (!response.ok) throw new Error("Error during request");
     const data = await response.json();
     return data;
   }catch(error){
+    console.error('Error to save', error);
+    return null;
+  }
+}
+
+export const getInventory = async (product_id) => {
+  try {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/estoque/estoque_id/${product_id}`);
+    if (!response.ok) throw new Error("Error during request");
+    const data = await response.json();
+    return (data);
+  } catch (error) {
     console.error('Error to save', error);
     return null;
   }

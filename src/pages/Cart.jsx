@@ -80,7 +80,7 @@ return (
       <h1 className="text-3xl font-bold mb-8">Your Cart</h1>
 
       {cart.length === 0 ? (
-        <p className="text-gray-500 text-lg">Your cart is empty</p>
+        <p className="text-gray-500 font-bold text-lg">Your cart is empty</p>
       ) : (
         <>
           <div className="overflow-x-auto">
