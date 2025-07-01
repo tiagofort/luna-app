@@ -64,7 +64,8 @@ export const executeLogin = async (email, senha) => {
     });
 
     if (!response.ok) {
-      throw new Error("Invalid Credentials");
+      const error = await response.json(); 
+      throw new Error(error.message || 'Fetch failed');
     }
 
     const data = await response.json();

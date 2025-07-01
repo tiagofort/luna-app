@@ -58,9 +58,9 @@ const LoginModal = ({ open, onClose }) => {
               setEmail('');
               setPassword('');
               showDialog("Welcome back!", "You are logged in!", "Got it!");
-            } catch (err) {
-              showDialog("Something Went Wrong", "Email or password do not match! Please, make sure you are registered.", "Got it!");
-              console.log(err.message);
+            } catch (error) {
+              showDialog("Something Went Wrong", error.message, "Got it!");
+              console.log(error.message);
             }
           }}
           className="space-y-5"
