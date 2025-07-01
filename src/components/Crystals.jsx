@@ -10,7 +10,7 @@ import onyx from '../assets/crystals/onyx.webp';
 import pink_quartz from '../assets/crystals/pink_quartz.webp';
 import pyrite from '../assets/crystals/pyrite.webp';
 import selenite from '../assets/crystals/selenite.webp';
-import sodalite from '../assets/crystals/agate.webp';
+import sodalite from '../assets/crystals/sodalite.webp';
 import white_quartz from '../assets/crystals/white_quartz.webp';
 
 

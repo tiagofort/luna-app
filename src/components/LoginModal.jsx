@@ -44,7 +44,7 @@ const LoginModal = ({ open, onClose }) => {
 
      
         <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-          👋 Welcome Back
+          👋 Welcome
           <p className="text-sm text-gray-500 mt-1">Do Your Login to continue</p>
         </h2>
 
