@@ -3,6 +3,7 @@ import { executeLogin } from '../services/api';
 import { useAuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import CenterWarningDialog from '../components/CenterWarningDialog';
+import ChangingPassword from "./ChangingPassword";
 import { X } from 'lucide-react';
 
 const LoginModal = ({ open, onClose }) => {
@@ -12,6 +13,7 @@ const LoginModal = ({ open, onClose }) => {
   const [dialogTitle, setDialogTitle] = useState("");
   const [dialogMessage, setDialogMessage] = useState("");
   const [dialogButton, setDialogButton] = useState("");
+  const [showEmailDialog, setShowEmailDialog] = useState(false);
   const { loginUser } = useAuthContext();
   const navigate = useNavigate();
 
@@ -34,7 +36,7 @@ const LoginModal = ({ open, onClose }) => {
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 relative border border-gray-200">
-       
+
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition"
@@ -42,13 +44,11 @@ const LoginModal = ({ open, onClose }) => {
           <X className="w-5 h-5" />
         </button>
 
-     
         <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
           👋 Welcome
           <p className="text-sm text-gray-500 mt-1">Do Your Login to continue</p>
         </h2>
 
-        
         <form
           onSubmit={async (e) => {
             e.preventDefault();
@@ -85,6 +85,12 @@ const LoginModal = ({ open, onClose }) => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            <p
+              className="text-sm text-mainColor mt-2 cursor-pointer hover:underline text-right"
+              onClick={() => setShowEmailDialog(true)}
+            >
+              Forgot Password?
+            </p>
           </div>
 
           <div className="flex gap-2 pt-2">
@@ -94,19 +100,20 @@ const LoginModal = ({ open, onClose }) => {
             >
               Connect
             </button>
-              <button
-                type="button"
-                className="flex-1 border border-mainColor text-mainColor font-medium py-2 rounded-md hover:bg-mainColor/10 transition"
-                onClick={() => {
-                  onClose();       
-                  navigate("/registeruser"); 
-                }}
-              >
-                Create Account
-              </button>
+            <button
+              type="button"
+              className="flex-1 border border-mainColor text-mainColor font-medium py-2 rounded-md hover:bg-mainColor/10 transition"
+              onClick={() => {
+                onClose();
+                navigate("/registeruser");
+              }}
+            >
+              Create Account
+            </button>
           </div>
         </form>
       </div>
+
       {dialogVisible && (
         <CenterWarningDialog
           title={dialogTitle}
@@ -117,7 +124,17 @@ const LoginModal = ({ open, onClose }) => {
               onClose();
             }
           }}
-            buttonMessage={dialogButton}
+          buttonMessage={dialogButton}
+        />
+      )}
+
+      {showEmailDialog && (
+        <ChangingPassword
+          onClose={() => setShowEmailDialog(false)}
+          onSend={(email) => {
+            setShowEmailDialog(false);
+            showDialog("Check Your Email", `We sent recovery instructions to ${email}`, "OK");
+          }}
         />
       )}
     </div>

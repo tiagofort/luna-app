@@ -61,7 +61,7 @@ export const executeLogin = async (email, senha) => {
       "Content-Type": "application/json",
     },
       body: JSON.stringify({ email, senha }),
-    });
+  });
 
     if (!response.ok) {
       const error = await response.json(); 
@@ -152,5 +152,28 @@ export const getInventory = async (product_id) => {
   } catch (error) {
     console.error('Error to save', error);
     return null;
+  }
+}
+
+export const ChangePasswordRequest = async (email) => {
+  try{
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/usuario/esqueceu_senha`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || "Error to validate your email");
+    }
+
+    const data = await response.json();
+    console.log("Server answer:", data);
+
+  }catch (error){
+
   }
 }
