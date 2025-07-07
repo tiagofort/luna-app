@@ -17,7 +17,7 @@ const ItemDetails = () => {
 
   const handleAddToCart = (item, quantity) => {
     if (quantity > inventory) {
-      setStockError('Você está tentando adicionar mais do que o disponível em estoque.');
+      setStockError('You are trying to add more than we currently have in stock.');
       return;
     }
 
@@ -158,8 +158,8 @@ const ItemDetails = () => {
 
       {isDialogOpen && (
         <WarningDialog
-          title="Item adicionado!"
-          message={`${quantity}x ${item.titulo} foi adicionado com sucesso!`}
+          title="Item added!"
+          message={`${quantity}x ${item.titulo} was add to your cart`}
           onClose={() => setIsDialogOpen(false)}
         />
       )}
