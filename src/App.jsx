@@ -36,7 +36,7 @@ export default function App() {
         <Route path="/accessories/:param" element={<Accessories />} />
         <Route path="cart" element={<Cart />} />
         <Route path="registeruser" element={<RegisterUser />} />
-        <Route path="/newpassword" element={<ResetPassword />} />
+        <Route path="/newpassword" element={<NewPassword />} />
         <Route path="/stone/:param" element={<StoneDetail />} />
         <Route path="/item/:id" element={<ItemDetails />} />
         <Route path="*" element={<NotFound />} />
