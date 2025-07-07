@@ -21,20 +21,23 @@ const NewPassword = () => {
     }
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/usuario/redefinir_senha?token=${token}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password: newPassword }),
-      });
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/usuario/redefinir_senha`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ password: newPassword }),
+        });
 
-      if (!response.ok) {
-        throw new Error("Something went wrong. Please try again.");
-      }
+        if (!response.ok) {
+            throw new Error("Something went wrong. Please try again.");
+        }
 
-      setSuccess("Password reset successfully.");
-      setTimeout(() => navigate("/login"), 2000);
+        setSuccess("Password reset successfully.");
+        setTimeout(() => navigate("/"), 2000);
     } catch (err) {
-      setError(err.message);
+        setError(err.message);
     }
   };
 
