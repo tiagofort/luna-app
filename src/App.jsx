@@ -10,6 +10,7 @@ import Loader from './components/Loader';
 import Cart from '../src/pages/Cart';
 import RegisterUser from './pages/RegisterUser';
 import StoneDetail from './pages/StoneDetail';
+import NewPassword from './pages/NewPassword';
 
 
 export default function App() {
@@ -35,6 +36,7 @@ export default function App() {
         <Route path="/accessories/:param" element={<Accessories />} />
         <Route path="cart" element={<Cart />} />
         <Route path="registeruser" element={<RegisterUser />} />
+        <Route path="/newpassword" element={<ResetPassword />} />
         <Route path="/stone/:param" element={<StoneDetail />} />
         <Route path="/item/:id" element={<ItemDetails />} />
         <Route path="*" element={<NotFound />} />
