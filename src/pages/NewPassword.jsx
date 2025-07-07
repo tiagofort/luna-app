@@ -1,7 +1,7 @@
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const ResetPassword = () => {
+const NewPassword = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -74,4 +74,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default NewPassword;
