@@ -20,14 +20,15 @@ const NewPassword = () => {
       return;
     }
 
-    try {
+      try {
+        console.log(token)
         const response = await fetch(`${import.meta.env.VITE_API_URL}/usuario/redefinir_senha`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify({ password: newPassword }),
+            body: JSON.stringify({ senha: newPassword }),
         });
 
         if (!response.ok) {
