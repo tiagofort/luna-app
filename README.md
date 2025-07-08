@@ -82,7 +82,7 @@ src/
 
 The UI adapts beautifully across all screen sizes — from mobile to tablet and desktop — ensuring a seamless shopping experience for users on any device.
 
-![Responsive Test](https://drive.google.com/file/d/1FojTCZmUdW_KF3JcpXCqIMVwn4uoG_xd/view)
+![Responsive Test](https://imagens-tiago.s3.eu-north-1.amazonaws.com/responsive-luna.png)
 
 ---
 
