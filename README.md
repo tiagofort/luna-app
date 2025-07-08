@@ -82,7 +82,7 @@ src/
 
 The UI adapts beautifully across all screen sizes — from mobile to tablet and desktop — ensuring a seamless shopping experience for users on any device.
 
-![Responsive Test](./path-to-your-screenshot.png) <!-- Replace with actual image path if hosted -->
+![Responsive Test](https://drive.google.com/file/d/1FojTCZmUdW_KF3JcpXCqIMVwn4uoG_xd/view)
 
 ---
 
