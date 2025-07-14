@@ -25,7 +25,10 @@ const ItemDetails = () => {
     addToCart({
       _id: item._id,
       name: item.titulo,
-      price: parseFloat(item.preco),
+      price: parseFloat(item.desconto && item.desconto > 0
+        ? (parseFloat(item.preco) * (1 - item.desconto / 100))
+        : item.preco
+      ),
       quantity,
     });
 
@@ -58,6 +61,18 @@ const ItemDetails = () => {
     item.midia?.url3,
     item.midia?.url4,
   ].filter(Boolean);
+
+  const calculateDiscountedPrice = () => {
+    const price = parseFloat(item.preco);
+    const discount = parseFloat(item.desconto || 0);
+
+    if (discount > 0) {
+      const discountedPrice = price * (1 - discount / 100);
+      return formatCurrency(discountedPrice);
+    }
+    return formatCurrency(price);
+  };
+
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -92,9 +107,28 @@ const ItemDetails = () => {
             <p className="text-sm font-semibold text-gray-500 mt-1">({inventory} in stock)</p>
           )}
 
-          <p className="text-xl text-mainColor font-semibold mt-4">
-            {formatCurrency(parseFloat(item.preco))}
+          <p className="text-xl font-semibold mt-4">
+            {item.desconto > 0 ? (
+              <>
+                <span className="text-gray-500 line-through mr-2">
+                  {formatCurrency(parseFloat(item.preco))}
+                </span>
+                <span className="text-mainColor">
+                  {calculateDiscountedPrice()}
+                </span>
+              </>
+            ) : (
+              <span className="text-mainColor">
+                {formatCurrency(parseFloat(item.preco))}
+              </span>
+            )}
           </p>
+
+          {item.desconto > 0 && (
+            <p className="text-sm text-green-600 font-semibold">
+              Discount: {item.desconto}%
+            </p>
+          )}
 
           <div className="mt-4 flex flex-col gap-2">
             <div className="flex items-center gap-4">
