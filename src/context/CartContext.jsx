@@ -12,21 +12,41 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (product) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item._id === product._id);
+  
+const addToCart = (product) => {
+  setCart((prevCart) => {
+    const normalizedProduct = {
+      ...product,
+      quantity: Number(product.quantity) || 1,
+      image:
+        product.image ||
+        product.imageUrl ||
+        product.midia?.url1 ||
+        null,
+    };
 
-      if (existingItem) {
-        return prevCart.map((item) =>
-          item._id === product._id
-            ? { ...item, quantity: item.quantity + product.quantity }
-            : item
-        );
-      } else {
-        return [...prevCart, product];
-      }
-    });
-  };
+    const existingItem = prevCart.find(
+      (item) => item._id === normalizedProduct._id
+    );
+
+    if (existingItem) {
+      return prevCart.map((item) =>
+        item._id === normalizedProduct._id
+          ? {
+              ...item,
+              quantity:
+                (Number(item.quantity) || 0) +
+                normalizedProduct.quantity,
+              image: item.image || normalizedProduct.image,
+            }
+          : item
+      );
+    }
+
+    return [...prevCart, normalizedProduct];
+  });
+};
+
 
   const removeFromCart = (indexToRemove) => {
     setCart((prevCart) =>

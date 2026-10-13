@@ -13,6 +13,7 @@ import StoneDetail from './pages/StoneDetail';
 import NewPassword from './pages/NewPassword';
 
 
+
 export default function App() {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
